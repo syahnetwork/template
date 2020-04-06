@@ -1,9 +1,13 @@
 <script>
-	export let name;
+  // export let name;
+  // let name='adam'
+  let src=''
+  let name='rickrolled'
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
+  <img {src} alt="{name} :)">
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
 
