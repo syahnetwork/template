@@ -1,10 +1,11 @@
 <script>
-  let count = 1;
+  let count = 0;
 
-  //the $: means re run whenever these values change
-  $: doubled = count * 2;
-  $: quadrupled = doubled * 2;
-  $: sixTimes = quadrupled * 2;
+  $: if (count >= 10) {
+    alert("count >=10 , back to 9");
+    count = 9;
+  }
+
   function clickHandler() {
     count += 1;
   }
@@ -14,8 +15,6 @@
 
 </style>
 
-<button on:click={clickHandler}>count:{count}</button>
-
-<p>{count}*2={doubled}</p>
-<p>{doubled}*2={quadrupled}</p>
-<p>{quadrupled}*2={sixTimes}</p>
+<button on:click={clickHandler}>
+  clicked {count} {count === 1 || count === 0?'time':'times'}
+</button>
