@@ -1,11 +1,19 @@
 <script>
-  let x = 7;
+  let forgedInFire = [
+    { id: "FKKeZqe0X7Q", name: "forged in fire charlemagne" },
+    { id: "9hSqGq3hM1c", name: "forged in fire javanese kris" },
+    { id: "EVhTGmdUkkA", name: "forged in fire zhanmadao" }
+  ];
 </script>
 
-{#if x > 10}
-  <p>{x} is greater than 10</p>
-{:else if 5 > x}
-  <p>{x} is less than 5</p>
-{:else}
-  <p>{x} is between 5 and 10</p>
-{/if}
+<h1>i pick some forged in fire episode</h1>
+
+<ul>
+  {#each forgedInFire as { id, name }, i}
+    <li>
+      <a href="https://www.youtube.com/watch?v={id}" target="_blank">
+        {i + 1} : {name}
+      </a>
+    </li>
+  {/each}
+</ul>
