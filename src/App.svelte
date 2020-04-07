@@ -1,19 +1,36 @@
 <script>
-  let forgedInFire = [
-    { id: "FKKeZqe0X7Q", name: "forged in fire charlemagne" },
-    { id: "9hSqGq3hM1c", name: "forged in fire javanese kris" },
-    { id: "EVhTGmdUkkA", name: "forged in fire zhanmadao" }
+  import Thing from "./Thing.svelte";
+
+  let things = [
+    { id: 1, color: "#0d0887" },
+    { id: 2, color: "#6a00a8" },
+    { id: 3, color: "#b12a90" },
+    { id: 4, color: "#e16462" },
+    { id: 5, color: "#fca636" }
   ];
+
+  function handleClick() {
+    things = things.slice(1);
+  }
 </script>
 
-<h1>i pick some forged in fire episode</h1>
+<button on:click={handleClick}>remove first thing</button>
 
-<ul>
-  {#each forgedInFire as { id, name }, i}
-    <li>
-      <a href="https://www.youtube.com/watch?v={id}" target="_blank">
-        {i + 1} : {name}
-      </a>
-    </li>
-  {/each}
-</ul>
+<div style="display:grid;grid-template-columns:1fr 1fr;grip-gap: 1em">
+  <div>
+    <h2>keyed</h2>
+    {#each things as thing (thing.id)}
+      <Thing current={thing.color} />
+    {/each}
+
+  </div>
+
+  <div>
+    <h2>unkeyed</h2>
+    {#each things as thing}
+      <Thing current={thing.color} />
+    {/each}
+
+  </div>
+
+</div>
