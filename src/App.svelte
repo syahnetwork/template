@@ -4,6 +4,7 @@
   let src = "";
   let name = "rickrolled";
   import NestedObject from './TestNested.svelte'
+  let htmlString = 'hello <strong>Adam</strong>;'
 </script>
 
 <style>
@@ -40,4 +41,5 @@
   <p>
     calling components from ... 
   </p><NestedObject/>
+  <p>{@html htmlString}</p>
 </main>
