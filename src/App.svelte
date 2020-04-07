@@ -3,6 +3,7 @@
   // let name='adam'
   let src = "";
   let name = "rickrolled";
+  import NestedObject from './TestNested.svelte'
 </script>
 
 <style>
@@ -37,8 +38,6 @@
   <h1>Hello {name}!</h1>
   <img {src} alt="{name} :)" />
   <p>
-    Visit the
-    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-    to learn how to build Svelte apps.
-  </p>
+    calling components from ... 
+  </p><NestedObject/>
 </main>
