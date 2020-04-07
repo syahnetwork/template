@@ -1,16 +1,11 @@
 <script>
-  let user = { loggedIn: false };
-
-  function toggle() {
-    user.loggedIn = !user.loggedIn;
-    console.log("ADAM LOGIN === " + user.loggedIn);
-  }
+  let x = 7;
 </script>
 
-{#if user.loggedIn}
-  <button on:click={toggle}>log out</button>
-<!-- {/if} -->
+{#if x > 10}
+  <p>{x} is greater than 10</p>
+{:else if 5 > x}
+  <p>{x} is less than 5</p>
 {:else}
-<!-- {#if !user.loggedIn} -->
-  <button on:click={toggle}>log in</button>
+  <p>{x} is between 5 and 10</p>
 {/if}
