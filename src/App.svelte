@@ -9,8 +9,8 @@
 
 {#if user.loggedIn}
   <button on:click={toggle}>log out</button>
-{/if}
-
-{#if !user.loggedIn}
+<!-- {/if} -->
+{:else}
+<!-- {#if !user.loggedIn} -->
   <button on:click={toggle}>log in</button>
 {/if}
