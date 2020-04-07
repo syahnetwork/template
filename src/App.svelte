@@ -1,10 +1,16 @@
 <script>
-  import Nested from "./NestedProps.svelte";
+  import Info from "./Info.svelte";
+
+  const pkg = {
+    name: "svelte",
+    version: 3,
+    speed: "blazing",
+    website: "https://svelte.dev"
+  };
 </script>
 
 <style>
 
 </style>
 
-<Nested answer={3000} />
-<Nested />
+<Info {...pkg} />
