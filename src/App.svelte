@@ -1,14 +1,10 @@
 <script>
-  let m = { x: 0, y: 0 };
+function handleClick() {
+  alert('no more alerts')
+}
 </script>
+<!-- give rule only once -->
+<button on:click|once={handleClick}>
+click me
 
-<style>
-  div {
-    width: 100%;
-    height: 100%;
-  }
-</style>
-
-<div on:mousemove="{e => m = { x: e.clientX, y: e.clientY }}">
-  the mouse position is {m.x} x {m.y}
-</div>
+</button>
