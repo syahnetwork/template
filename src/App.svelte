@@ -1,18 +1,16 @@
 <script>
-  let a = 1;
-  let b = 2;
+  let yes = false;
 </script>
 
 <label for="">
-  <input type="number" bind:value={a} min="0" max="10" />
-  <input type="range" bind:value={a} min="0" max="10" />
-
+  <input type="checkbox" bind:checked={yes} />
+  yes , send email
 </label>
 
-<label for="">
-  <input type="number" bind:value={b} min="0" max="10" />
-  <input type="range" bind:value={b} min="0" max="10" />
+{#if yes}
+  <p>thanks, will send email</p>
+{:else}
+  <p>we won't send email</p>
+{/if}
 
-</label>
-<!-- wow binding realtime changeable data -->
-<p>{a}+{b}={a + b}</p>
+<button disabled={!yes}>subscribe</button>
