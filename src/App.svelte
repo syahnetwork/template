@@ -1,10 +1,9 @@
 <script>
-function handleClick() {
-  alert('no more alerts')
+import Inner from './Inner.svelte'
+
+function handleMessage(event) {
+  alert(event.detail.text)
 }
 </script>
-<!-- give rule only once -->
-<button on:click|once={handleClick}>
-click me
 
-</button>
+<Inner on:message={handleMessage}/>
