@@ -1,10 +1,9 @@
 <script>
-  import Outer from "./Outer.svelte";
+  import CustomButton from "./CustomButton.svelte";
 
-  function handleMessage(event) {
-    alert(event.detail.text);
+  function handleClick() {
+    alert("clicked");
   }
 </script>
 
-<Outer on:message={handleMessage} />
-<!-- call object hello from outer which has inner components -->
+<CustomButton on:click={handleClick} />
