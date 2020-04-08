@@ -1,6 +1,18 @@
 <script>
-  let name = "";
+  let a = 1;
+  let b = 2;
 </script>
 
-<input type=" text" bind:value={name} placeholder="enter name" />
-<p>hello {name || 'stranger'}!</p>
+<label for="">
+  <input type="number" bind:value={a} min="0" max="10" />
+  <input type="range" bind:value={a} min="0" max="10" />
+
+</label>
+
+<label for="">
+  <input type="number" bind:value={b} min="0" max="10" />
+  <input type="range" bind:value={b} min="0" max="10" />
+
+</label>
+<!-- wow binding realtime changeable data -->
+<p>{a}+{b}={a + b}</p>
