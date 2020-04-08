@@ -1,9 +1,10 @@
 <script>
-import Inner from './Inner.svelte'
+  import Outer from "./Outer.svelte";
 
-function handleMessage(event) {
-  alert(event.detail.text)
-}
+  function handleMessage(event) {
+    alert(event.detail.text);
+  }
 </script>
 
-<Inner on:message={handleMessage}/>
+<Outer on:message={handleMessage} />
+<!-- call object hello from outer which has inner components -->
