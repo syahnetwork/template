@@ -1,7 +1,24 @@
 <script>
-  let src = "tutorial/image.gif";
-  let name = "rick astley";
+  let w;
+  let h;
+  let size = 42;
+  let text = "edit me";
 </script>
 
-<!-- <img src={src} alt=""> -->
-<img {src} alt="{name} dancing" />
+<style>
+  input {
+    display: block;
+  }
+  div {
+    display: inline-block;
+  }
+</style>
+
+<input type="range" bind:value={size} />
+<input type="text" bind:value={text} />
+
+<p>size : {w}px x{h}px</p>
+
+<div bind:clientWidth={w} bind:clientHeight={h}>
+  <span style="font-size: {size}px">{text}</span>
+</div>
