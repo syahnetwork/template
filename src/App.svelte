@@ -1,42 +1,94 @@
 <script>
-  import { onMount } from 'svelte';
+  let employee = [
+    { firstName: 'adam', lastName: 'man' },
+    { firstName: 'bill', lastName: 'gates' },
+    { firstName: 'mark', lastName: 'zuckerberg' },
+  ]
 
-  let photos = [];
+  let searchFirstName = ''
+  let firstName = ''
+  let lastName = ''
+  let i = 0
 
-  onMount(async () => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/photos?_limit=20`
-    );
-    photos = await res.json();
-  });
-  console.log(photos);
+  $: filterEmployee = searchFirstName
+    ? employee.filter(theEmployee => {
+        const name = `${theEmployee.lastName},${theEmployee.firstName}`
+        return name.toLowerCase().startsWith(searchFirstName.toLowerCase())
+      })
+    : employee
+
+  $: selected = filterEmployee[i]
+
+  $: reset_inputs(selected)
+
+  function create() {
+    employee = employee.concat({ firstName, lastName })
+    i = employee.length - 1
+    firstName = lastName = ''
+  }
+
+  function update() {
+    selected.firstName = firstName
+    selected.lastName = lastName
+    employee = employee
+  }
+
+  function deleteEmployee() {
+    const index = employee.indexOf(selected)
+    employee = [...employee.slice(0, index), ...employee.slice(index + 1)]
+
+    firstName = lastName = ''
+    i = Math.min(i, filterEmployee.length - 2)
+  }
+
+  function reset_inputs(theEmployee) {
+    firstName = theEmployee ? theEmployee.firstName : ''
+    lastName = theEmployee ? theEmployee.lastName : ''
+  }
 </script>
 
 <style>
-  .photos {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 8px;
+  * {
+    font-family: inherit;
+    font-size: inherit;
   }
 
-  figure,
-  img {
-    width: 100%;
-    margin: 0;
+  input {
+    display: block;
+    margin: 0 0 0.5em 0;
+  }
+
+  select {
+    float: left;
+    margin: 0 1em 1em 0;
+    width: 14em;
+  }
+
+  .buttons {
+    clear: both;
   }
 </style>
 
-<h1>photo albums</h1>
+<input type="text" placeholder="search employee" bind:value={searchFirstName} />
 
-<div class="photos">
-  {#each photos as photo}
-    <figure>
-      <img src={photo.thumbnailUrl} alt={photo.title} />
-      <figcaption>{photo.title}</figcaption>
-    </figure>
-  {:else}
-    <!-- if can't fetch data photos.length === 0  show loading text  -->
-    <p>loading...</p>
+<select name="" id="" bind:value={i} size={5}>
+  {#each filterEmployee as theEmployee, i}
+    <option value={i}>{theEmployee.lastName},{theEmployee.firstName}</option>
   {/each}
+</select>
+
+<label for="">
+  <input type="text" bind:value={firstName} placeholder="first name" />
+</label>
+<label for="">
+  <input type="text" bind:value={lastName} placeholder="last name" />
+</label>
+
+<div class="buttons">
+  <button on:click={create} disabled={!firstName || !lastName}>Create</button>
+  <button on:click={update} disabled={!firstName || !lastName || !selected}>
+    update
+  </button>
+  <button on:click={deleteEmployee} disabled={!selected}>delete</button>
+
 </div>
