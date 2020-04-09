@@ -1,43 +1,49 @@
 <script>
-  let questions = [
-    { id: 1, text: `where go to school?` },
-    { id: 2, text: `what is your mother's name?` },
-    { id: 3, text: `what is googling?` }
-  ];
+  let scoops = 1;
+  let flavours = ["Mint choc chip"];
 
-  let selected;
-  let answer = "";
+  let menu = ["Cookies and cream", "Mint choc chip", "Raspberry ripple"];
 
-  function handleSubmit() {
-    alert(
-      `answered question ${selected.id} (${selected.text}) with "${answer}"`
-    );
+  function join(flavours) {
+    if (flavours.length === 1) return flavours[0];
+    return `${flavours.slice(0, -1).join(", ")} and ${
+      flavours[flavours.length - 1]
+    }`;
   }
 </script>
 
-<style>
-  input {
-    display: block;
-    width: 500px;
-    max-width: 100%;
-  }
-</style>
+<h2>Size</h2>
 
-<h2>insecurity questions</h2>
+<label>
+  <input type="radio" bind:group={scoops} value={1} />
+  One scoop
+</label>
 
-<form action="" on:submit|preventDefault={handleSubmit}>
-  <select name="" id="" bind:value={selected} on:change={() => (answer = '')}>
+<label>
+  <input type="radio" bind:group={scoops} value={2} />
+  Two scoops
+</label>
 
-    {#each questions as question}
-      <option value={question}>{question.text}</option>
-    {/each}
+<label>
+  <input type="radio" bind:group={scoops} value={3} />
+  Three scoops
+</label>
 
-  </select>
+<h2>Flavours</h2>
 
-  <input type="text" bind:value={answer} />
+<select name="" id="" multiple bind:value={flavours}>
+  {#each menu as flavour}
+    <option value={flavour}>{flavour}</option>
+  {/each}
 
-  <button disabled={!answer} type="submit">submit</button>
+</select>
 
-  <p>selected question {selected ? selected.id : '[waiting...]'}</p>
-
-</form>
+{#if flavours.length === 0}
+  <p>Please select at least one flavour</p>
+{:else if flavours.length > scoops}
+  <p>Can't order more flavours than scoops!</p>
+{:else}
+  <p>
+    You ordered {scoops} {scoops === 1 ? 'scoop' : 'scoops'} of {join(flavours)}
+  </p>
+{/if}
