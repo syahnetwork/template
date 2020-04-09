@@ -1,49 +1,35 @@
 <script>
-  let scoops = 1;
-  let flavours = ["Mint choc chip"];
+  let todos = [
+    { done: false, text: "finish svelte tutorial" },
+    { done: false, text: "build app" },
+    { done: false, text: "svelte mastery" }
+  ];
 
-  let menu = ["Cookies and cream", "Mint choc chip", "Raspberry ripple"];
-
-  function join(flavours) {
-    if (flavours.length === 1) return flavours[0];
-    return `${flavours.slice(0, -1).join(", ")} and ${
-      flavours[flavours.length - 1]
-    }`;
+  function add() {
+    todos = todos.concat({ done: false, text: "" });
   }
+
+  function clear() {
+    todos = todos.filter(t => !t.done);
+  }
+  $: remaining = todos.filter(t => !t.done).length;
 </script>
 
-<h2>Size</h2>
+<style>
+  .done {
+    opacity: 0.4;
+  }
+</style>
 
-<label>
-  <input type="radio" bind:group={scoops} value={1} />
-  One scoop
-</label>
+<h1>todos</h1>
 
-<label>
-  <input type="radio" bind:group={scoops} value={2} />
-  Two scoops
-</label>
+{#each todos as todo}
+  <div class:done={todo.done}>
+    <input type="checkbox" bind:checked={todo.done} />
+    <input type="text" placeholder="what to do?" bind:value={todo.text} />
+  </div>
+{/each}
 
-<label>
-  <input type="radio" bind:group={scoops} value={3} />
-  Three scoops
-</label>
+<button on:click={add}>add new</button>
 
-<h2>Flavours</h2>
-
-<select name="" id="" multiple bind:value={flavours}>
-  {#each menu as flavour}
-    <option value={flavour}>{flavour}</option>
-  {/each}
-
-</select>
-
-{#if flavours.length === 0}
-  <p>Please select at least one flavour</p>
-{:else if flavours.length > scoops}
-  <p>Can't order more flavours than scoops!</p>
-{:else}
-  <p>
-    You ordered {scoops} {scoops === 1 ? 'scoop' : 'scoops'} of {join(flavours)}
-  </p>
-{/if}
+<button on:click={clear}>clear completed</button>
